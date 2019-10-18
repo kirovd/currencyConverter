@@ -1,0 +1,15 @@
+function callPndo(vElement_id,button_id,boxHeight){var vElement=document.getElementById(vElement_id);var button=document.getElementById(button_id);pndo(vElement,button,boxHeight);}
+var posx;var posy;function getMousePosition(e){posx=0;posy=0;var ev=(!e)?window.event:e;if(ev.pageX){posx=ev.pageX+window.pageXOffset;posy=ev.pageY+window.pageYOffset;}else if(ev.clientX){posx=ev.clientX+document.body.scrollLeft;posy=ev.clientY+document.body.scrollTop;}else{return false}
+return true;}
+function toggleExportOptions(startY,vElement_id,event,isQuickviewPage){var vElement=document.getElementById(vElement_id);if(isQuickviewPage==true){startY=startY+26;}else{startY=startY-110;}
+vElement.style.top=(startY)+'px';if(vElement.style.height=="auto"){vElement.style.height=(0+"em");vElement.style.display="none";}else{vElement.style.display="block";vElement.style.height="auto";}}
+function pndo(sDiv,button,boxHeight){if(sDiv.style.height=="auto"){sDiv.style.height=(boxHeight+"em");sDiv.style.overflow="hidden";sDiv.title="Click on the text to show the whole item.";button.src="img/button_showAll.gif";button.alt="Show all";button.title="Show all";}else{if(sDiv.offsetHeight<(sDiv.scrollHeight-10)){sDiv.style.height="auto";sDiv.style.overflow="visible";}else{sDiv.style.height="auto";sDiv.style.overflow="visible";}
+sDiv.title="Click on the text to hide this item.";button.src="img/button_hideAll.gif";button.alt="Hide all";button.title="Hide all";}}
+function toggleElementVisibility(elementId,caller){var element=document.getElementById(elementId);var isVisible=(element.style.display!='block')&&(element.style.display!='');element.style.display=isVisible?'block':'none';if(caller!=null){caller.src=isVisible?'img/icon_hide.gif':'img/icon_show.gif';}
+return isVisible;}
+function moreOption(selectElementId,numberOfElement){var element=document.getElementById(selectElementId);var hiddenParameter=document.getElementById('s'+selectElementId);if(element.size<numberOfElement+1){element.size=element.size+2;hiddenParameter.value=element.size;}
+showHideButtons(selectElementId,numberOfElement);}
+function lessOption(selectElementId,numberOfElement){var element=document.getElementById(selectElementId);var hiddenParameter=document.getElementById('s'+selectElementId);if(element.size>Math.min(numberOfElement+1,4)){element.size=element.size-2;hiddenParameter.value=element.size;}
+showHideButtons(selectElementId,numberOfElement);}
+function showHideButtons(selectElementId,numberOfElement){var element=document.getElementById(selectElementId);var buttonLess=document.getElementById('bL'+selectElementId);if(element.size<=3){buttonLess.style.display='none';}else{buttonLess.style.display='block';}
+var buttonMore=document.getElementById('bM'+selectElementId);if(element.size<numberOfElement+1){buttonMore.style.display='block';}else{buttonMore.style.display='none';}}
